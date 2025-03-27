@@ -27,54 +27,49 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		const name = input.name || input.className || input.type;
 		let isSpam = false;
 
+		// Show warning message
 		const showWarning = (input, message) => {
-			// Remove any existing warning
 			const next = input.nextElementSibling;
 			if (next && next.classList.contains("awd-warning")) {
 				next.remove();
 			}
-
-			// Create and insert new warning
 			const div = document.createElement("div");
 			div.className = "awd-warning";
 			div.textContent = message;
 			input.parentNode.insertBefore(div, input.nextSibling);
 		};
 
-		// console.log(`Checking input [${name}]: "${trimmedValue}"`);
-
+		// Emails
 		if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
 			const baseDomains = input
 				.getAttribute("awd-form-domains")
 				.toLowerCase()
 				.split(",")
 				.map((d) => d.trim());
-			// console.log(`→ Testing email against domains:`, baseDomains);
 			const emailDomain = trimmedValue.split("@")[1];
 			if (emailDomain) {
 				const matched = baseDomains.find((base) => emailDomain.startsWith(base + ".") || emailDomain === base);
 				if (matched) {
-					// console.log(`🚫 SPAM detected in [${name}]: matched domain "${matched}" in "${emailDomain}"`);
 					showWarning(input, matched);
 					isSpam = true;
 				}
 			}
 		}
 
+		// Phones
 		if (input.type === "tel" && input.hasAttribute("awd-form-phone")) {
 			const codes = input
 				.getAttribute("awd-form-phone")
 				.split(",")
 				.map((c) => c.trim());
-			// console.log(`→ Testing phone against codes:`, codes);
 			const matchedCode = codes.find((code) => trimmedValue.startsWith(code));
 			if (matchedCode) {
-				// console.log(`🚫 SPAM detected in [${name}]: phone starts with blocked code "${matchedCode}"`);
 				showWarning(input, matchedCode);
 				isSpam = true;
 			}
 		}
 
+		// Text and Textareas
 		const isTextLike = input.type === "text" || input.tagName.toLowerCase() === "textarea";
 		if (isTextLike) {
 			if (input.hasAttribute("awd-form-txt")) {
@@ -83,43 +78,40 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 					.toLowerCase()
 					.split(",")
 					.map((w) => w.trim());
-				// console.log(`→ Testing text against blocked words:`, words);
 				const matchedWord = words.find((word) => trimmedValue.includes(word));
 				if (matchedWord) {
-					// console.log(`🚫 SPAM detected in [${name}]: contains blocked word "${matchedWord}"`);
 					showWarning(input, matchedWord);
 					isSpam = true;
 				}
 			}
 
+			// Check for minimum length
 			if (trimmedValue !== "" && input.hasAttribute("awd-form-txt-min")) {
 				const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
 				if (trimmedValue.length < minLength) {
-					// console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
 					showWarning(input, `text must be at least ${minLength} charachters long`);
 					isSpam = true;
 				}
 			}
 
+			// Check for maximum length
 			if (input.hasAttribute("awd-form-txt-max")) {
 				const maxLength = parseInt(input.getAttribute("awd-form-txt-max"), 10);
 				if (trimmedValue.length > maxLength) {
-					// console.log(`🚫 SPAM detected in [${name}]: text exceeds maximum length (${maxLength})`);
 					showWarning(input, `text must be less then ${maxLength} charachters long`);
 					isSpam = true;
 				}
 			}
 
+			// Check Language
 			if (input.hasAttribute("awd-form-lang")) {
 				const allowed = input
 					.getAttribute("awd-form-lang")
 					.split(",")
 					.map((l) => l.trim().toLowerCase());
 				const detected = Array.from(detectScripts(trimmedValue));
-				// console.log(`→ Detected scripts: ${detected.join(", ")}, allowed:`, allowed);
 				const disallowed = detected.filter((lang) => !allowed.includes(lang));
 				if (disallowed.length) {
-					// console.log(`🚫 SPAM detected in [${name}]: contains disallowed scripts: ${disallowed.join(", ")}`);
 					showWarning(input, disallowed[0]);
 					isSpam = true;
 				}
