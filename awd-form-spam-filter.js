@@ -19,7 +19,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
     // Email domain check
     if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
       const baseDomains = input.getAttribute("awd-form-domains").toLowerCase().split(",").map(d => d.trim());
-      console.log(`→ Testing email against domains:`, baseDomains);
+      //console.log(`→ Testing email against domains:`, baseDomains);
       const emailDomain = trimmedValue.split("@")[1];
       if (emailDomain) {
         const matched = baseDomains.find(base => emailDomain.startsWith(base + ".") || emailDomain === base);
@@ -33,7 +33,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
     // Phone code check
     if (input.type === "tel" && input.hasAttribute("awd-form-phone")) {
       const codes = input.getAttribute("awd-form-phone").split(",").map(c => c.trim());
-      console.log(`→ Testing phone against codes:`, codes);
+      //console.log(`→ Testing phone against codes:`, codes);
       const matchedCode = codes.find(code => trimmedValue.startsWith(code));
       if (matchedCode) {
         //console.log(`🚫 SPAM detected in [${name}]: phone starts with blocked code "${matchedCode}"`);
@@ -46,7 +46,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
     if (isTextLike) {
       if (input.hasAttribute("awd-form-txt")) {
         const words = input.getAttribute("awd-form-txt").toLowerCase().split(",").map(w => w.trim());
-        console.log(`→ Testing text against blocked words:`, words);
+        //console.log(`→ Testing text against blocked words:`, words);
         const matchedWord = words.find(word => trimmedValue.includes(word));
         if (matchedWord) {
           //console.log(`🚫 SPAM detected in [${name}]: contains blocked word "${matchedWord}"`);
@@ -95,7 +95,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
   form.addEventListener("submit", e => {
     if (checkForm()) {
       e.preventDefault();
-      console.log("🚫 Form submission blocked due to SPAM");
+      //console.log("🚫 Form submission blocked due to SPAM");
     }
   });
 
