@@ -37,7 +37,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 			// Create and insert new warning
 			const div = document.createElement("div");
 			div.className = "awd-warning";
-			div.textContent = `This field won't accept "${message}"`;
+			div.textContent = message;
 			input.parentNode.insertBefore(div, input.nextSibling);
 		};
 
@@ -96,7 +96,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
 				if (trimmedValue.length < minLength) {
 					// console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
-					showWarning(input, `text under ${minLength} charachters`);
+					showWarning(input, `text must be at least ${minLength} charachters long`);
 					isSpam = true;
 				}
 			}
@@ -105,7 +105,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				const maxLength = parseInt(input.getAttribute("awd-form-txt-max"), 10);
 				if (trimmedValue.length > maxLength) {
 					// console.log(`🚫 SPAM detected in [${name}]: text exceeds maximum length (${maxLength})`);
-					showWarning(input, `text over ${maxLength} charachters`);
+					showWarning(input, `text must be less then ${maxLength} charachters long`);
 					isSpam = true;
 				}
 			}
