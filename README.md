@@ -15,5 +15,5 @@ email inputs:
 - awd-form-domains String (any domain name you add will be detected as spam. 'yahoo, hotmail')
 
 Examples:
-//<input type="text" awd-form-txt-min="4" awd-form-txt-max="20"> - This will disable form if text is shorter then 4 or longer then 20.
-//<input type="email" awd-form-domains="yahoo, hotmail" > - This will disable form if email domain name is yahoo or hotmail.
+```<input type="text" awd-form-txt-min="4" awd-form-txt-max="20">``` - This will disable form if text is shorter then 4 or longer then 20.
+```<input type="email" awd-form-domains="yahoo, hotmail" >``` - This will disable form if email domain name is yahoo or hotmail.
