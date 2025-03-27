@@ -117,7 +117,8 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 
 			if (input.hasAttribute("awd-form-txt-min")) {
 				const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
-				if (trimmedValue.length < minLength) {
+				const isSubmitEvent = input.dataset.awdForceMin === "true";
+				if (isSubmitEvent && trimmedValue.length < minLength) {
 					showWarning(input, `min ${minLength}`);
 					isSpam = true;
 				}
@@ -168,9 +169,17 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 	});
 
 	form.addEventListener("submit", (e) => {
+		inputs.forEach((input) => {
+			input.dataset.awdForceMin = "true";
+		});
+
 		if (checkForm()) {
 			e.preventDefault();
 		}
+
+		inputs.forEach((input) => {
+			delete input.dataset.awdForceMin;
+		});
 	});
 
 	wrapFields();
