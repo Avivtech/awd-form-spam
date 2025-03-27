@@ -50,7 +50,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 			if (emailDomain) {
 				const matched = baseDomains.find((base) => emailDomain.startsWith(base + ".") || emailDomain === base);
 				if (matched) {
-					showWarning(input, matched);
+					showWarning(input, `${matched} email domain name is not acceptable`);
 					isSpam = true;
 				}
 			}
@@ -142,7 +142,6 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 	form.addEventListener("submit", (e) => {
 		if (checkForm()) {
 			e.preventDefault();
-			// console.log("🚫 Form submission blocked due to SPAM");
 		}
 	});
 
