@@ -3,6 +3,9 @@ A small plugin for form spam filtering
 
 Use attributes to enhance your form to disable spam.
 
+
+
+
 ## Useage:
 On your Forms add: awd-form='spam-filter'
 
@@ -13,6 +16,9 @@ On your Forms add: awd-form='spam-filter'
 
 ### email inputs:
 - awd-form-domains String (any domain name you add will be detected as spam. 'yahoo, hotmail')
+
+
+
 
 ## Examples:
 
