@@ -41,7 +41,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
       }
     }
 
-    // Text/textarea keyword and min-length check
+    // Text/textarea keyword and min/max length check
     const isTextLike = input.type === "text" || input.tagName.toLowerCase() === "textarea";
     if (isTextLike) {
       if (input.hasAttribute("awd-form-txt")) {
@@ -58,6 +58,14 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
         const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
         if (trimmedValue.length < minLength) {
           console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
+          isSpam = true;
+        }
+      }
+
+      if (input.hasAttribute("awd-form-txt-max")) {
+        const maxLength = parseInt(input.getAttribute("awd-form-txt-max"), 10);
+        if (trimmedValue.length > maxLength) {
+          console.log(`🚫 SPAM detected in [${name}]: text exceeds maximum length (${maxLength})`);
           isSpam = true;
         }
       }
