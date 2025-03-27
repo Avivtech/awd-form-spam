@@ -27,16 +27,26 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		const name = input.name || input.className || input.type;
 		let isSpam = false;
 
+		// Empty fields are not spam
+		if (trimmedValue === "") {
+			removeWarning(input);
+			return false;
+		}
+
 		// Show warning message
 		const showWarning = (input, message) => {
+			removeWarning(input); // clean any existing
+			const div = document.createElement("div");
+			div.className = "awd-warning";
+			div.textContent = `This field won't accept "${message}"`;
+			input.parentNode.insertBefore(div, input.nextSibling);
+		};
+
+		const removeWarning = (input) => {
 			const next = input.nextElementSibling;
 			if (next && next.classList.contains("awd-warning")) {
 				next.remove();
 			}
-			const div = document.createElement("div");
-			div.className = "awd-warning";
-			div.textContent = message;
-			input.parentNode.insertBefore(div, input.nextSibling);
 		};
 
 		// Emails
@@ -117,7 +127,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				}
 			}
 		}
-
+		if (!isSpam) removeWarning(input);
 		return isSpam;
 	};
 
