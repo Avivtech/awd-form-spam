@@ -22,6 +22,7 @@ No setup, no server-side code — just add and go.
 </form>
 ```
 **Optional: add warnings when input is flagged as spam by adding**
+
 This will add warnings below each input if it is flagged as spam.
 Warning element class: ```.awd-warning```
 
