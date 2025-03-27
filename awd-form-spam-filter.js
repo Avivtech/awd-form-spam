@@ -27,12 +27,6 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		const name = input.name || input.className || input.type;
 		let isSpam = false;
 
-		// Empty fields are not spam
-		if (trimmedValue === "") {
-			removeWarning(input);
-			return false;
-		}
-
 		// Show warning message
 		const showWarning = (input, message) => {
 			const form = input.closest("form");
@@ -54,6 +48,12 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				next.remove();
 			}
 		};
+
+		// Empty fields are not spam
+		if (trimmedValue === "") {
+			removeWarning(input);
+			return false;
+		}
 
 		// Emails
 		if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
