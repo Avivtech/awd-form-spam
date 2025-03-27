@@ -8,12 +8,12 @@ Use attributes to enhance your form to disable spam.
 On your Forms add: awd-form='spam-filter'
 
 ### text and textareas inputs:
-- awd-form-txt String (any word or text you want to be detected as spam. 'money, spam, win')
-- awd-form-txt-min Number (any number will be the minimum chrachters to type in. '5')
-- awd-form-txt-max Number (any number will be the maximum chrachters to type in. '30')
+- ```awd-form-txt``` String (any word or text you want to be detected as spam. ```'money, spam, win'```)
+- ```awd-form-txt-min``` Number (any number will be the minimum chrachters to type in. ```'5'```)
+- ```awd-form-txt-max``` Number (any number will be the maximum chrachters to type in. ```'30'```)
 
 ### email inputs:
-- awd-form-domains String (any domain name you add will be detected as spam. 'yahoo, hotmail')
+- ```awd-form-domains``` String (any domain name you add will be detected as spam. 'yahoo, hotmail')
 
 <br><br>
 ## Examples:
