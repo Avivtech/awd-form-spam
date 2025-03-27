@@ -7,9 +7,13 @@ Use attributes to enhance your form to disable spam.
 On your Forms add: awd-form='spam-filter'
 
 text ans textareas inputs:
-- awd-form-txt='spam, money, win' (any word or text you want to be detected as spam)
-- awd-form-txt-min='4' (any number will be the minimum chrachters to type in)
-- awd-form-txt-max='30' (any number will be the maximum chrachters to type in)
+- awd-form-txt String (any word or text you want to be detected as spam. 'money, spam, win')
+- awd-form-txt-min Number (any number will be the minimum chrachters to type in. '5')
+- awd-form-txt-max Number (any number will be the maximum chrachters to type in. '30')
 
 email inputs:
-- awd-form-domains='hotmail, yahoo' (any domain name you add will be detected as spam)
+- awd-form-domains String (any domain name you add will be detected as spam. 'yahoo, hotmail')
+
+Examples:
+<input type="text" awd-form-txt-min="4" awd-form-txt-max="20"> - This will disable form if text is shorter then 4 or longer then 20.
+<input type="email" awd-form-domains="yahoo, hotmail" > - This will disable form if email domain name is yahoo or hotmail.
