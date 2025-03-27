@@ -14,15 +14,8 @@ No setup, no server-side code — just add and go.
 <script src="https://Avivtech.github.io/awd-form-spam/awd-form-spam-filter.js" defer></script>
 ```
 
-2. **Add the attribute to your form:**
-
-```html
-<form awd-form="spam-filter">
-  ...
-</form>
-```
+2. **Add the ```awd-form``` attribute to your form**
 **Optional: add warnings when input is flagged as spam by adding**
-
 This will add warnings below each input if it is flagged as spam.
 Warning element class: ```.awd-warning```
 
