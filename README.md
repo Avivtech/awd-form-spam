@@ -36,10 +36,10 @@ Optional: To show warnings under fields when spam is detected, add `awd-form-war
 
 | Attribute            | Type   | Description                                                |
 |----------------------|--------|------------------------------------------------------------|
-| `awd-form-txt`       | String | Blocked words (e.g. `"money, spam, win"`)                 |
+| `awd-form-txt`       | String | Blocked words (e.g. `"money, spam, win"`)                  |
 | `awd-form-txt-min`   | Number | Minimum required characters (e.g. `"5"`)                   |
 | `awd-form-txt-max`   | Number | Maximum allowed characters (e.g. `"30"`)                   |
-| `awd-form-lang`      | String | Allowed scripts/languages (e.g. `"en"`, `"en,he,fr"`)      |
+| `awd-form-lang`      | String | Allowed scripts/languages (e.g. `"en"`, `"en,he,ar"`)      |
 
 > 💡 Script detection includes Latin (`en`), Hebrew (`he`), Arabic (`ar`), Cyrillic (`ru`), and Chinese (`zh`).
 
