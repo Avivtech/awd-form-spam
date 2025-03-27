@@ -9,17 +9,18 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
   };
 
   const checkSingleInput = (input) => {
-    const value = input.value.trim().toLowerCase();
+    const rawValue = input.value || "";
+    const trimmedValue = rawValue.trim().toLowerCase();
     const name = input.name || input.className || input.type;
     let isSpam = false;
 
-    console.log(`Checking input [${name}]: "${value}"`);
+    console.log(`Checking input [${name}]: "${trimmedValue}"`);
 
     // Email domain check
     if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
       const baseDomains = input.getAttribute("awd-form-domains").toLowerCase().split(",").map(d => d.trim());
       console.log(`→ Testing email against domains:`, baseDomains);
-      const emailDomain = value.split("@")[1];
+      const emailDomain = trimmedValue.split("@")[1];
       if (emailDomain) {
         const matched = baseDomains.find(base => emailDomain.startsWith(base + ".") || emailDomain === base);
         if (matched) {
@@ -33,7 +34,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
     if (input.type === "tel" && input.hasAttribute("awd-form-phone")) {
       const codes = input.getAttribute("awd-form-phone").split(",").map(c => c.trim());
       console.log(`→ Testing phone against codes:`, codes);
-      const matchedCode = codes.find(code => value.startsWith(code));
+      const matchedCode = codes.find(code => trimmedValue.startsWith(code));
       if (matchedCode) {
         console.log(`🚫 SPAM detected in [${name}]: phone starts with blocked code "${matchedCode}"`);
         isSpam = true;
@@ -46,16 +47,16 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
       if (input.hasAttribute("awd-form-txt")) {
         const words = input.getAttribute("awd-form-txt").toLowerCase().split(",").map(w => w.trim());
         console.log(`→ Testing text against blocked words:`, words);
-        const matchedWord = words.find(word => value.includes(word));
+        const matchedWord = words.find(word => trimmedValue.includes(word));
         if (matchedWord) {
           console.log(`🚫 SPAM detected in [${name}]: contains blocked word "${matchedWord}"`);
           isSpam = true;
         }
       }
 
-      if (value !== "" && input.hasAttribute("awd-form-txt-min")) {
+      if (trimmedValue !== "" && input.hasAttribute("awd-form-txt-min")) {
         const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
-        if (value.length < minLength) {
+        if (trimmedValue.length < minLength) {
           console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
           isSpam = true;
         }
