@@ -21,41 +21,38 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		return scripts;
 	};
 
+	const showWarning = (input, message) => {
+		const form = input.closest("form");
+		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
+
+		removeWarning(input);
+		const div = document.createElement("div");
+		div.className = "awd-warning";
+		div.textContent = `This field won't accept "${message}"`;
+		input.parentNode.insertBefore(div, input.nextSibling);
+	};
+
+	const removeWarning = (input) => {
+		const form = input.closest("form");
+		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
+
+		const next = input.nextElementSibling;
+		if (next && next.classList.contains("awd-warning")) {
+			next.remove();
+		}
+	};
+
 	const checkSingleInput = (input) => {
 		const rawValue = input.value || "";
 		const trimmedValue = rawValue.trim().toLowerCase();
 		const name = input.name || input.className || input.type;
 		let isSpam = false;
 
-		// Show warning message
-		const showWarning = (input, message) => {
-			const form = input.closest("form");
-			if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
-
-			removeWarning(input);
-			const div = document.createElement("div");
-			div.className = "awd-warning";
-			div.textContent = `This field won't accept "${message}"`;
-			input.parentNode.insertBefore(div, input.nextSibling);
-		};
-
-		const removeWarning = (input) => {
-			const form = input.closest("form");
-			if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
-
-			const next = input.nextElementSibling;
-			if (next && next.classList.contains("awd-warning")) {
-				next.remove();
-			}
-		};
-
-		// Empty fields are not spam
 		if (trimmedValue === "") {
 			removeWarning(input);
 			return false;
 		}
 
-		// Emails
 		if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
 			const baseDomains = input
 				.getAttribute("awd-form-domains")
@@ -66,13 +63,12 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 			if (emailDomain) {
 				const matched = baseDomains.find((base) => emailDomain.startsWith(base + ".") || emailDomain === base);
 				if (matched) {
-					showWarning(input, `${matched} email domain name is not acceptable`);
+					showWarning(input, matched);
 					isSpam = true;
 				}
 			}
 		}
 
-		// Phones
 		if (input.type === "tel" && input.hasAttribute("awd-form-phone")) {
 			const codes = input
 				.getAttribute("awd-form-phone")
@@ -85,7 +81,6 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 			}
 		}
 
-		// Text and Textareas
 		const isTextLike = input.type === "text" || input.tagName.toLowerCase() === "textarea";
 		if (isTextLike) {
 			if (input.hasAttribute("awd-form-txt")) {
@@ -101,25 +96,22 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				}
 			}
 
-			// Check for minimum length
-			if (trimmedValue !== "" && input.hasAttribute("awd-form-txt-min")) {
+			if (input.hasAttribute("awd-form-txt-min")) {
 				const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
 				if (trimmedValue.length < minLength) {
-					showWarning(input, `text must be at least ${minLength} charachters long`);
+					showWarning(input, `min ${minLength}`);
 					isSpam = true;
 				}
 			}
 
-			// Check for maximum length
 			if (input.hasAttribute("awd-form-txt-max")) {
 				const maxLength = parseInt(input.getAttribute("awd-form-txt-max"), 10);
 				if (trimmedValue.length > maxLength) {
-					showWarning(input, `text must be less then ${maxLength} charachters long`);
+					showWarning(input, `max ${maxLength}`);
 					isSpam = true;
 				}
 			}
 
-			// Check Language
 			if (input.hasAttribute("awd-form-lang")) {
 				const allowed = input
 					.getAttribute("awd-form-lang")
@@ -133,6 +125,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				}
 			}
 		}
+
 		if (!isSpam) removeWarning(input);
 		return isSpam;
 	};
