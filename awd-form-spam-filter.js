@@ -53,8 +53,8 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
         }
       }
 
-      if (input.hasAttribute("awd-form-min")) {
-        const minLength = parseInt(input.getAttribute("awd-form-min"), 10);
+      if (input.hasAttribute("awd-form-txt-min")) {
+        const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
         if (value.length < minLength) {
           console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
           isSpam = true;
