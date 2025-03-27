@@ -27,6 +27,20 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		const name = input.name || input.className || input.type;
 		let isSpam = false;
 
+		const showWarning = (input, message) => {
+			// Remove any existing warning
+			const next = input.nextElementSibling;
+			if (next && next.classList.contains("awd-warning")) {
+				next.remove();
+			}
+
+			// Create and insert new warning
+			const div = document.createElement("div");
+			div.className = "awd-warning";
+			div.textContent = `This field won't accept "${message}"`;
+			input.parentNode.insertBefore(div, input.nextSibling);
+		};
+
 		// console.log(`Checking input [${name}]: "${trimmedValue}"`);
 
 		if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
@@ -82,7 +96,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
 				if (trimmedValue.length < minLength) {
 					// console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
-					showWarning(input, `min ${minLength}`);
+					showWarning(input, `text under ${minLength} charachters`);
 					isSpam = true;
 				}
 			}
@@ -91,7 +105,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 				const maxLength = parseInt(input.getAttribute("awd-form-txt-max"), 10);
 				if (trimmedValue.length > maxLength) {
 					// console.log(`🚫 SPAM detected in [${name}]: text exceeds maximum length (${maxLength})`);
-					showWarning(input, `max ${maxLength}`);
+					showWarning(input, `text over ${maxLength} charachters`);
 					isSpam = true;
 				}
 			}
@@ -139,20 +153,6 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 			// console.log("🚫 Form submission blocked due to SPAM");
 		}
 	});
-
-	const showWarning = (input, message) => {
-		// Remove any existing warning
-		const next = input.nextElementSibling;
-		if (next && next.classList.contains("awd-warning")) {
-			next.remove();
-		}
-
-		// Create and insert new warning
-		const div = document.createElement("div");
-		div.className = "awd-warning";
-		div.textContent = `This field won't accept "${message}"`;
-		input.parentNode.insertBefore(div, input.nextSibling);
-	};
 
 	checkForm();
 });
