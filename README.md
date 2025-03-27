@@ -21,6 +21,12 @@ No setup, no server-side code — just add and go.
   ...
 </form>
 ```
+** Optional: add warnings when input is flagged as spam by adding
+```html
+<form awd-form="spam-filter" awd-form-warnings="true">
+  ...
+</form>
+```
 
 3. **Use input-level attributes to enable filtering.**
 <br><br>
