@@ -12,33 +12,52 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		const scripts = new Set();
 		for (const char of text.trim()) {
 			const code = char.charCodeAt(0);
-			if (code >= 0x0590 && code <= 0x05ff) scripts.add("he"); // Hebrew
-			else if (code >= 0x0600 && code <= 0x06ff) scripts.add("ar"); // Arabic
-			else if (code >= 0x0400 && code <= 0x04ff) scripts.add("ru"); // Cyrillic
-			else if (code >= 0x4e00 && code <= 0x9fff) scripts.add("zh"); // Chinese
-			else if ((code >= 0x0041 && code <= 0x007a) || (code >= 0x00c0 && code <= 0x00ff)) scripts.add("en"); // Latin
+			if (code >= 0x0590 && code <= 0x05ff) scripts.add("he");
+			else if (code >= 0x0600 && code <= 0x06ff) scripts.add("ar");
+			else if (code >= 0x0400 && code <= 0x04ff) scripts.add("ru");
+			else if (code >= 0x4e00 && code <= 0x9fff) scripts.add("zh");
+			else if ((code >= 0x0041 && code <= 0x007a) || (code >= 0x00c0 && code <= 0x00ff)) scripts.add("en");
 		}
 		return scripts;
+	};
+
+	const wrapFields = () => {
+		inputs.forEach((input) => {
+			const wrapper = document.createElement("div");
+			wrapper.style.position = "relative";
+
+			input.parentNode.insertBefore(wrapper, input);
+			wrapper.appendChild(input);
+
+			const warning = document.createElement("div");
+			warning.className = "awd-warning";
+			warning.style.pointerEvents = "none";
+			warning.style.display = "inline-block";
+			warning.style.opacity = "0";
+			warning.style.transition = "opacity 300ms ease";
+			wrapper.appendChild(warning);
+		});
 	};
 
 	const showWarning = (input, message) => {
 		const form = input.closest("form");
 		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
 
-		removeWarning(input);
-		const div = document.createElement("div");
-		div.className = "awd-warning";
-		div.textContent = `This field won't accept "${message}"`;
-		input.parentNode.insertBefore(div, input.nextSibling);
+		const warning = input.parentNode.querySelector(".awd-warning");
+		if (warning) {
+			warning.textContent = `This field won't accept "${message}"`;
+			warning.style.opacity = "1";
+		}
 	};
 
 	const removeWarning = (input) => {
 		const form = input.closest("form");
 		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
 
-		const next = input.nextElementSibling;
-		if (next && next.classList.contains("awd-warning")) {
-			next.remove();
+		const warning = input.parentNode.querySelector(".awd-warning");
+		if (warning) {
+			warning.textContent = "";
+			warning.style.opacity = "0";
 		}
 	};
 
@@ -154,5 +173,6 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		}
 	});
 
+	wrapFields();
 	checkForm();
 });
