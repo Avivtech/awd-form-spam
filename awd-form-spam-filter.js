@@ -14,7 +14,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
     const name = input.name || input.className || input.type;
     let isSpam = false;
 
-    console.log(`Checking input [${name}]: "${trimmedValue}"`);
+    //console.log(`Checking input [${name}]: "${trimmedValue}"`);
 
     // Email domain check
     if (input.type === "email" && input.hasAttribute("awd-form-domains")) {
@@ -24,7 +24,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
       if (emailDomain) {
         const matched = baseDomains.find(base => emailDomain.startsWith(base + ".") || emailDomain === base);
         if (matched) {
-          console.log(`🚫 SPAM detected in [${name}]: matched domain "${matched}" in "${emailDomain}"`);
+          //console.log(`🚫 SPAM detected in [${name}]: matched domain "${matched}" in "${emailDomain}"`);
           isSpam = true;
         }
       }
@@ -36,7 +36,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
       console.log(`→ Testing phone against codes:`, codes);
       const matchedCode = codes.find(code => trimmedValue.startsWith(code));
       if (matchedCode) {
-        console.log(`🚫 SPAM detected in [${name}]: phone starts with blocked code "${matchedCode}"`);
+        //console.log(`🚫 SPAM detected in [${name}]: phone starts with blocked code "${matchedCode}"`);
         isSpam = true;
       }
     }
@@ -49,7 +49,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
         console.log(`→ Testing text against blocked words:`, words);
         const matchedWord = words.find(word => trimmedValue.includes(word));
         if (matchedWord) {
-          console.log(`🚫 SPAM detected in [${name}]: contains blocked word "${matchedWord}"`);
+          //console.log(`🚫 SPAM detected in [${name}]: contains blocked word "${matchedWord}"`);
           isSpam = true;
         }
       }
@@ -57,7 +57,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
       if (trimmedValue !== "" && input.hasAttribute("awd-form-txt-min")) {
         const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
         if (trimmedValue.length < minLength) {
-          console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
+          //console.log(`🚫 SPAM detected in [${name}]: text is shorter than minimum length (${minLength})`);
           isSpam = true;
         }
       }
@@ -65,7 +65,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
       if (input.hasAttribute("awd-form-txt-max")) {
         const maxLength = parseInt(input.getAttribute("awd-form-txt-max"), 10);
         if (trimmedValue.length > maxLength) {
-          console.log(`🚫 SPAM detected in [${name}]: text exceeds maximum length (${maxLength})`);
+          //console.log(`🚫 SPAM detected in [${name}]: text exceeds maximum length (${maxLength})`);
           isSpam = true;
         }
       }
