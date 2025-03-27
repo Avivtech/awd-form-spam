@@ -16,16 +16,14 @@ No setup, no server-side code — just add and go.
 
 2. **Add the ```awd-form``` attribute to your form**
 
-**Optional: add warnings when input is flagged as spam by adding**
-
-This will add warnings below each input if it is flagged as spam.
-Warning element class: ```.awd-warning```
+Optional: add warnings when input is flagged as spam below each input by adding ```awd-form-warnings="true"``` to the form element.
 
 ```html
 <form awd-form="spam-filter" awd-form-warnings="true">
   ...
 </form>
 ```
+Warning element class: ```.awd-warning```
 
 3. **Use input-level attributes to enable filtering.**
 <br><br>
