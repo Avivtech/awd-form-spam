@@ -24,7 +24,7 @@ No setup, no server-side code — just add and go.
 
 3. **Use input-level attributes to enable filtering.**
 <br><br>
-## ✏️ Input Attributes
+## Input Attributes
 
 ### 📝 Text / Textarea Inputs
 
@@ -55,7 +55,7 @@ No setup, no server-side code — just add and go.
 
 ---
 
-## 📌 Behavior
+## Behavior
 
 - The submit button is automatically disabled if spam is detected.
 - The button gets a class of `awd-disabled` when blocked.
@@ -63,7 +63,7 @@ No setup, no server-side code — just add and go.
 
 ---
 
-## 💡 Examples
+## Examples
 
 ```html
 <input type="text" awd-form-txt="win,offer" awd-form-txt-min="5" awd-form-txt-max="20">
@@ -83,7 +83,7 @@ No setup, no server-side code — just add and go.
 
 ---
 
-## 🔒 Why use it?
+## Why use it?
 
 - Lightweight, no dependencies
 - Instant client-side protection
