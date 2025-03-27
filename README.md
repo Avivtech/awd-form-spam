@@ -3,9 +3,7 @@ A small plugin for form spam filtering
 
 Use attributes to enhance your form to disable spam.
 
-
-
-
+<br><br><br><br>
 ## Useage:
 On your Forms add: awd-form='spam-filter'
 
@@ -17,9 +15,7 @@ On your Forms add: awd-form='spam-filter'
 ### email inputs:
 - awd-form-domains String (any domain name you add will be detected as spam. 'yahoo, hotmail')
 
-
-
-
+<br><br><br><br>
 ## Examples:
 
 ```<input type="text" awd-form-txt-min="4" awd-form-txt-max="20">``` - This will disable form if text is shorter then 4 or longer then 20.
