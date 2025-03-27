@@ -5,7 +5,8 @@ Use attributes to enhance your form to disable spam.
 
 <br><br>
 ## Useage:
-1. Add ```<script src="https://Avivtech.github.io/awd-form-spam/awd-form-spam-filter.js" defer></script>``` to your project.
+1. Add the library to your project
+```<script src="https://Avivtech.github.io/awd-form-spam/awd-form-spam-filter.js" defer></script>```
 2. On your Forms add: awd-form='spam-filter'
 3. On every input field you want to check spam add attributes:
 
