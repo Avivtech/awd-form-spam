@@ -22,9 +22,7 @@ No setup, no server-side code — just add and go.
 </form>
 ```
 
-3. **Use optional input-level attributes to enable filtering.**
-
----
+3. **Use input-level attributes to enable filtering.**
 
 ## ✏️ Input Attributes
 
