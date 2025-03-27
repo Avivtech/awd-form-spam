@@ -4,7 +4,7 @@
 A small plugin for client-side form spam filtering using custom HTML attributes.  
 No setup, no server-side code — just add and go.
 
-<br>
+---
 
 ## ✅ Quick Start
 
@@ -14,59 +14,62 @@ No setup, no server-side code — just add and go.
 <script src="https://Avivtech.github.io/awd-form-spam/awd-form-spam-filter.js" defer></script>
 ```
 
-2. **Add the ```awd-form``` attribute to your form**
+2. **Add `awd-form="spam-filter"` to your form**
 
-Optional: add warnings when input is flagged as spam below each input by adding ```awd-form-warnings="true"``` to the form element.
+Optional: To show warnings under fields when spam is detected, add `awd-form-warnings="true"`.
 
 ```html
 <form awd-form="spam-filter" awd-form-warnings="true">
   ...
 </form>
 ```
-Warning element class: ```.awd-warning```
 
-3. **Use input-level attributes to enable filtering.**
-<br><br>
-## Input Attributes
+> Warnings will appear as elements with the class: `.awd-warning`
+
+3. **Add attributes to input fields to control spam filtering**
+
+---
+
+## 🧩 Input Attributes
 
 ### 📝 Text / Textarea Inputs
 
-| Attribute              | Type     | Description                                          |
-|------------------------|----------|------------------------------------------------------|
-| `awd-form-txt`         | String   | Blocked words (e.g., `"money, spam, win"`)           |
-| `awd-form-txt-min`     | Number   | Minimum length required (e.g., `"5"`)                |
-| `awd-form-txt-max`     | Number   | Maximum allowed length (e.g., `"30"`)                |
-| `awd-form-lang`        | String   | Allowed scripts (e.g., `"en"`, `"en,he"`)            |
+| Attribute            | Type   | Description                                                |
+|----------------------|--------|------------------------------------------------------------|
+| `awd-form-txt`       | String | Blocked words (e.g. `"money, spam, win"`)                 |
+| `awd-form-txt-min`   | Number | Minimum required characters (e.g. `"5"`)                   |
+| `awd-form-txt-max`   | Number | Maximum allowed characters (e.g. `"30"`)                   |
+| `awd-form-lang`      | String | Allowed scripts/languages (e.g. `"en"`, `"en,he,fr"`)      |
 
-> 💡 Language is detected by character script (Latin, Hebrew, Cyrillic, etc.)
+> 💡 Script detection includes Latin (`en`), Hebrew (`he`), Arabic (`ar`), Cyrillic (`ru`), and Chinese (`zh`).
 
 ---
 
 ### 📧 Email Inputs
 
-| Attribute              | Type     | Description                                          |
-|------------------------|----------|------------------------------------------------------|
-| `awd-form-domains`     | String   | Block emails by domain (e.g., `"yahoo, hotmail"`)    |
+| Attribute             | Type   | Description                                             |
+|-----------------------|--------|---------------------------------------------------------|
+| `awd-form-domains`    | String | Block email domains (e.g. `"yahoo, hotmail"`)           |
 
 ---
 
 ### 📱 Phone Inputs
 
-| Attribute              | Type     | Description                                          |
-|------------------------|----------|------------------------------------------------------|
-| `awd-form-phone`       | String   | Block phone numbers starting with specific prefixes  |
+| Attribute             | Type   | Description                                             |
+|-----------------------|--------|---------------------------------------------------------|
+| `awd-form-phone`      | String | Block phone numbers starting with given prefixes        |
 
 ---
 
-## Behavior
+## ⚙️ Behavior
 
-- The submit button is automatically disabled if spam is detected.
-- The button gets a class of `awd-disabled` when blocked.
-- Spam checks run on input, focus, blur, and submit.
+- Submit button is disabled if spam is detected.
+- Button receives a `awd-disabled` class while blocked.
+- Spam checks are triggered on: `input`, `focus`, `blur`, and `submit`.
 
 ---
 
-## Examples
+## 🧪 Examples
 
 ```html
 <input type="text" awd-form-txt="win,offer" awd-form-txt-min="5" awd-form-txt-max="20">
@@ -81,13 +84,13 @@ Warning element class: ```.awd-warning```
 ```
 
 ```html
-<input type="tel" awd-form-phone="+7,+91">
+<input type="tel" awd-form-phone="1,972">
 ```
 
 ---
 
-## Why use it?
+## 💡 Why Use It?
 
-- Lightweight, no dependencies
-- Instant client-side protection
-- Easy to customize per field
+- Lightweight, no external dependencies
+- No setup or configuration
+- Instant form hardening against common spam inputs
