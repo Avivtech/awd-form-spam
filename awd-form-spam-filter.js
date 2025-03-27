@@ -117,8 +117,12 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 
 			if (input.hasAttribute("awd-form-txt-min")) {
 				const minLength = parseInt(input.getAttribute("awd-form-txt-min"), 10);
-				const isSubmitEvent = input.dataset.awdForceMin === "true";
-				if (isSubmitEvent && trimmedValue.length < minLength) {
+
+				if (trimmedValue.length >= minLength) {
+					input.dataset.awdMinChecked = "true";
+				}
+				const shouldCheck = input.dataset.awdMinChecked === "true";
+				if (shouldCheck && trimmedValue.length < minLength) {
 					showWarning(input, `min ${minLength}`);
 					isSpam = true;
 				}
