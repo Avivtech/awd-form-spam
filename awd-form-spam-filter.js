@@ -87,7 +87,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach(form => {
     ["input", "focus", "blur"].forEach(evt => {
       input.addEventListener(evt, () => {
         const spam = checkSingleInput(input);
-        updateSubmitState(spam || checkForm());
+        updateSubmitState(spam);
       });
     });
   });
