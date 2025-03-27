@@ -23,7 +23,7 @@ No setup, no server-side code — just add and go.
 ```
 
 3. **Use input-level attributes to enable filtering.**
-
+<br><br>
 ## ✏️ Input Attributes
 
 ### 📝 Text / Textarea Inputs
