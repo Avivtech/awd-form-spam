@@ -5,8 +5,10 @@ Use attributes to enhance your form to disable spam.
 
 <br><br>
 ## Useage:
-On your Forms add: awd-form='spam-filter'
-
+1. Add ```<script src="https://Avivtech.github.io/awd-form-spam/awd-form-spam-filter.js" defer></script>``` to your project.
+2. On your Forms add: awd-form='spam-filter'
+3. On every input field you want to check spam add attributes:
+4. 
 ### text and textareas inputs:
 - ```awd-form-txt``` String (any word or text you want to be detected as spam. ```'money, spam, win'```)
 - ```awd-form-txt-min``` Number (any number will be the minimum chrachters to type in. ```'5'```)
