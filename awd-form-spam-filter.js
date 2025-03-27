@@ -35,6 +35,9 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 
 		// Show warning message
 		const showWarning = (input, message) => {
+			const form = input.closest("form");
+			if (!form || form.getAttribute("awd-form") !== "warnings") return;
+
 			removeWarning(input); // clean any existing
 			const div = document.createElement("div");
 			div.className = "awd-warning";
@@ -43,6 +46,9 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		};
 
 		const removeWarning = (input) => {
+			const form = input.closest("form");
+			if (!form || form.getAttribute("awd-form") !== "warnings") return;
+
 			const next = input.nextElementSibling;
 			if (next && next.classList.contains("awd-warning")) {
 				next.remove();
