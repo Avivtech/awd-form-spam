@@ -1,3 +1,5 @@
+console.warn("AWD Form Spam Filter Loaded");
+
 document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 	const inputs = form.querySelectorAll("input[type='email'], input[type='tel'], input[type='text'], input[type='number'], textarea");
 	const submitBtn = form.querySelector("button[type='submit'], input[type='submit']");
@@ -41,7 +43,7 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 
 	// Show a warning message for the input field
 	const showWarning = (input, message) => {
-    console.warn(`Spam detected in field "${input.name || input.className || input.type}": ${message}`);
+		console.warn(`Spam detected in field "${input.name || input.className || input.type}": ${message}`);
 		const form = input.closest("form");
 		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
 
