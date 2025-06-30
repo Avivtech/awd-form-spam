@@ -39,26 +39,34 @@ document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 		});
 	};
 
+	// Show a warning message for the input field
 	const showWarning = (input, message) => {
 		const form = input.closest("form");
 		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
 
-		const warning = input.parentNode.querySelector(".awd-warning");
-		if (warning) {
-			warning.textContent = `This field won't accept "${message}"`;
-			warning.style.opacity = "1";
-		}
+		// Remove any existing warnings first
+		removeWarning(input);
+
+		// Create a new warning element
+		const warning = document.createElement("div");
+		warning.className = "awd-warning";
+		warning.textContent = `This field won't accept "${message}"`;
+		warning.style.pointerEvents = "none";
+		warning.style.display = "inline-block";
+		warning.style.opacity = "1";
+		warning.style.transition = "opacity 300ms ease";
+
+		input.parentNode.appendChild(warning);
 	};
 
+	// Remove any existing warning messages for the input field
 	const removeWarning = (input) => {
 		const form = input.closest("form");
 		if (!form || form.getAttribute("awd-form-warnings") !== "true") return;
 
-		const warning = input.parentNode.querySelector(".awd-warning");
-		if (warning) {
-			warning.textContent = "";
-			warning.style.opacity = "0";
-		}
+		// Remove all .awd-warning elements inside this input wrapper
+		const warnings = input.parentNode.querySelectorAll(".awd-warning");
+		warnings.forEach((el) => el.remove());
 	};
 
 	const checkSingleInput = (input) => {
