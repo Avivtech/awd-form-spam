@@ -5,6 +5,8 @@
 }
 .awd-warning {
 	position: absolute;
+  left: 0;
+  right: 0;
 	color: white;
 	background: red;
 	display: inline-block;
