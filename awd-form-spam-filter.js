@@ -1,4 +1,4 @@
-console.warn("AWD Form Spam Filter Loaded");
+console.log("AWD Form Spam Filter Loaded");
 
 document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 	const inputs = form.querySelectorAll("input[type='email'], input[type='tel'], input[type='text'], input[type='number'], textarea");
