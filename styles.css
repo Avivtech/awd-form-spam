@@ -1,0 +1,41 @@
+.awd-disabled,
+.awd-disabled:hover {
+	color: lightgrey;
+	background: darkgrey;
+}
+.awd-warning {
+	position: absolute;
+	color: white;
+	background: red;
+	display: inline-block;
+	padding: 0 6px;
+	font-size: 12px;
+	line-height: 16px;
+	border-radius: 2px;
+}
+.awd-warning:empty {
+	display: none;
+}
+.awd-warning:before {
+	content: "⚠️";
+	margin-right: 4px;
+}
+.awd-warning:empty:before {
+	content: "";
+}
+.awd-warning:after {
+	content: " ";
+}
+.awd-warning:after {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid red;
+	margin-left: 4px;
+	vertical-align: middle;
+}
+.awd-warning:empty:after {
+	content: "";
+}
