@@ -3,7 +3,6 @@ console.log("AWD Form Spam Filter Loaded");
 document.querySelectorAll("form[awd-form='spam-filter']").forEach((form) => {
 	const inputs = form.querySelectorAll("input[type='email'], input[type='tel'], input[type='text'], input[type='number'], textarea");
 	const submitBtn = form.querySelector("button[type='submit'], input[type='submit']");
-
 	const updateSubmitState = (isSpam) => {
 		if (!submitBtn) return;
 		submitBtn.disabled = isSpam;
